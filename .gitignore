@@ -28,16 +28,3 @@ hs_err_pid*
 *.iml
 *.ipr
 out/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
-.vscode/
-
-### docker ###
-/storage/
