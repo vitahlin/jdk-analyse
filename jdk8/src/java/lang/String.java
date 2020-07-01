@@ -135,6 +135,7 @@ public final class String
      * unnecessary since Strings are immutable.
      */
     public String() {
+        System.out.println("String");
         this.value = "".value;
     }
 
