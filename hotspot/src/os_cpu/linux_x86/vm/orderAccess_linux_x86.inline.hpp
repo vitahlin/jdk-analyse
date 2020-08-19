@@ -32,6 +32,7 @@
 
 // Implementation of class OrderAccess.
 
+// 4个内存屏障的实现
 inline void OrderAccess::loadload()   { acquire(); }
 inline void OrderAccess::storestore() { release(); }
 inline void OrderAccess::loadstore()  { acquire(); }
@@ -53,11 +54,13 @@ inline void OrderAccess::release() {
 }
 
 inline void OrderAccess::fence() {
+  // 是否是多处理器，内存屏障在多处理器架构下才能生效
   if (os::is_MP()) {
     // always use locked addl since mfence is sometimes expensive
 #ifdef AMD64
     __asm__ volatile ("lock; addl $0,0(%%rsp)" : : : "cc", "memory");
 #else
+    // 内存屏障，实际上还是靠lock指令来实现的
     __asm__ volatile ("lock; addl $0,0(%%esp)" : : : "cc", "memory");
 #endif
   }
